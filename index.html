@@ -45,7 +45,7 @@
                     for (var i = 1; i < rows.length; i++)
                     {
                         var newJSONRowString = '{';
-                        let cols = row[i].split(',')
+                        let cols = rows[i].split(',')
                         for (var o = 1; o < cols.length; o++)
                         {
                             newJSONRowString += `"${headers[o]}:"${cols[o]},`;
