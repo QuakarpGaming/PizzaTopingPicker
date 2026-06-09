@@ -48,7 +48,7 @@
                         var newJSONRowString = `"${cols[0]}":{`;
                         for (var o = 1; o < cols.length; o++)
                         {
-                            newJSONRowString += `"${headers[o]}:"${cols[o]},`;
+                            newJSONRowString += `"${headers[o]}:"${cols[o]}",`;
                         }
                         newJSONRowString = newJSONRowString.slice(0, -1) + "},";
                         JSONData += newJSONRowString;
