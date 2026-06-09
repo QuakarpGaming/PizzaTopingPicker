@@ -4,7 +4,7 @@
         <link rel="Stylesheet" href="Styles.css">
     </head>
     <body>
-        <fieldset class="down">
+        <fieldset class="down" id="peopleList">
             <!--
                 TODO
                 -in the read google sheet call, add the HTML genneration
@@ -32,12 +32,14 @@
     </body>
 </html>
 <script>
-    // Replace with your actual spreadsheet ID and sheet (gid) ID
+
     const spreadsheetId = '176Bgd3bxvrtFnCZTZnZFbm7hIHKAUxioBJuQDfznwck';
-    const gid = '0'; // '0' is usually the default first tab
-    //const url = `https://google.com{spreadsheetId}/export?format=csv&gid=${gid}`;
-    //const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:json`;
-    var rows = {}
+    const gid = '0';
+    var toppings = [];
+    var data = {};
+     
+
+
     async function readGoogleSheetCSV() {
         try {
             fetch(`https://docs.google.com/spreadsheets/d/${spreadsheetId}/export?format=csv&gid=0`)
@@ -45,22 +47,35 @@
                 .then(text => {
                     var rows = text.split(/\r?\n/);
                     var headers = text.split(/\r?\n/)[0].split(','); 
+                    //get the topping and store them
+                    headers.forEach((x) => {
+                        if (x != "Name")
+                            toppings.push(x)
+                    })
+
+                    //grab the container
+                    var namesContainer = document.getElementById("peopleList")
+                    //start the JSON STRING
                     var JSONData = "{"
                     for (var i = 1; i < rows.length; i++)
                     {
                         let cols = rows[i].split(',')
-                        var newJSONRowString = `"${cols[0]}":{`;
+                        var newJSONRowString = `"${cols[0]}":{`;//get name
+                        namesContainer.innerHTML += `<label>${cols[0]}&nbsp;<input type="checkbox" checked id="${cols[0].replace(" ","_")}"></label>`
                         for (var o = 1; o < cols.length; o++)
                         {
+                            //starts at one to get toppings and not name
                             newJSONRowString += `"${headers[o]}":"${cols[o]}",`;
                         }
+                        //end the toppings data obj
                         newJSONRowString = newJSONRowString.slice(0, -1) + "},";
                         JSONData += newJSONRowString;
                     }
+                    //get rid of the last comma(,) and add the final }
                     JSONData = JSONData.slice(0, -1) + "}";
 
-                    var testJSONDATA = JSON.parse(JSONData);
-                    console.log(testJSONDATA);
+                    data = JSON.parse(JSONData); // save globally
+
                 })
         } catch (error) {
             console.error("Failed to fetch Google Sheet:", error);
