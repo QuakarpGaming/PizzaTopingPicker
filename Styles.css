@@ -25,3 +25,10 @@ body{
     border: 2px darkgoldenrod solid;
     text-align: center;
 }
+
+.no{
+    color: darkred;
+    background-color: lightcoral;
+    border: 2px darkred solid;
+    text-align: center;
+}
