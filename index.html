@@ -8,6 +8,7 @@
             <!--TODO
                 figure out how to read the sheet and process the data and displany name/topings-->
             <legend>People</legend>
+                <!--
                 <label>Dailey&nbsp;<input type="checkbox" id="Dailey"></label>
             	<label>Paul&nbsp;<input type="checkbox" id="Paul"></label>
                 <label>Neil&nbsp;<input type="checkbox" id="Neil"></label>
@@ -19,6 +20,7 @@
                 <label>Pat&nbsp;<input type="checkbox" id="Pat"></label>
                 <label>Jenna&nbsp;<input type="checkbox" id="Jenna"></label>	
                 <label>Brendan&nbsp;<input type="checkbox" id="Brendan"></label>
+                -->
         </fieldset>
         <fieldset class="down leftCol">
             <label class="no">Green Pepper</label>
@@ -31,13 +33,30 @@
     const gid = '0'; // '0' is usually the default first tab
     //const url = `https://google.com{spreadsheetId}/export?format=csv&gid=${gid}`;
     //const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:json`;
-
+    var rows = {}
     async function readGoogleSheetCSV() {
         try {
             fetch(`https://docs.google.com/spreadsheets/d/${spreadsheetId}/export?format=csv&gid=0`)
                 .then(res => res.text())
                 .then(text => {
-                    var Headers = text.split(/\r?\n/)[0].split(','); 
+                    var rows = text.split(/\r?\n/);
+                    var headers = text.split(/\r?\n/)[0].split(','); 
+                    var JSONData = "{"
+                    for (var i = 1; i < rows.length; i++)
+                    {
+                        var newJSONRowString = '{';
+                        let cols = row[i].split(',')
+                        for (var o = 1; o < cols.length; o++)
+                        {
+                            newJSONRowString += `"${headers[o]}:"${cols[o]},`;
+                        }
+                        newJSONRowString = newJSONRowString.slice(0, -1) + "},";
+                        JSONData += newJSONRowString;
+                    }
+                    JSONData = JSONData.slice(0, -1) + "}";
+
+                    var testJSONDATA = JSON.parse(JSONData);
+                    console.log(testJSONDATA);
                 })
         } catch (error) {
             console.error("Failed to fetch Google Sheet:", error);
