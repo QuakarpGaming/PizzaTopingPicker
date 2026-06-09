@@ -44,8 +44,8 @@
                     var JSONData = "{"
                     for (var i = 1; i < rows.length; i++)
                     {
-                        var newJSONRowString = '{';
                         let cols = rows[i].split(',')
+                        var newJSONRowString = `"${cols[0]}:{"`;
                         for (var o = 1; o < cols.length; o++)
                         {
                             newJSONRowString += `"${headers[o]}:"${cols[o]},`;
