@@ -1,4 +1,27 @@
 body{
     background-color: white;
+    display: flex;
+    flex-direction: row;
 }
 
+.down{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+.leftCol{
+    width: 80%;
+}
+
+.yes{
+    color: darkgreen;
+    background-color: lightgreen;
+    border: 2px darkgreen solid;
+    text-align: center;
+}
+.maybe{
+    color: darkgoldenrod;
+    background-color: yellow;
+    border: 2px darkgoldenrod solid;
+    text-align: center;
+}
