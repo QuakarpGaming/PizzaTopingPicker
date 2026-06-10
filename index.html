@@ -40,7 +40,8 @@
                     if (currentToppingResult == undefined)
                     {
                         //add if not there yet
-                        results[top] = "M";
+                        results[top] = "";
+                        currentToppingResult = "";
                     }
                     if (currentToppingResult != "N") {
                         var personPrefernce = data[name][top];
@@ -50,6 +51,7 @@
 
                         if ((currentToppingResult == "Y" && personPrefernce != "Y")
                             || (currentToppingResult == "M" && personPrefernce == "N")
+                            || (currentToppingResult == "")
                         )
                         {
                             results[top] = personPrefernce;
@@ -76,6 +78,9 @@
 
         //grab fieldset
         var toppingsFieldSet = document.getElementById("toppings")
+        //reset innerHTML
+        toppingsFieldSet.innerHTML = `<legend>Topping</legend>`
+        //add results
         toppingsFieldSet.innerHTML += yesStr;
         toppingsFieldSet.innerHTML += maybeStr;
         toppingsFieldSet.innerHTML += noString;
