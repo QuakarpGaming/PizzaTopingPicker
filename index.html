@@ -4,7 +4,7 @@
         <link rel="Stylesheet" href="Styles.css">
     </head>
     <body>
-        <fieldset class="down" id="peopleList">
+        <fieldset class="down nameBox" id="peopleList">
             <!--
             TODO
             -in the read google sheet call, add the HTML genneration
@@ -13,17 +13,19 @@
         -->
             <legend>People</legend>
         </fieldset>
-        <fieldset class="down leftCol" id="yes">
-            <legend>Get</legend>
-        </fieldset>
+        <div class="toppingsBox">
+            <fieldset class="down leftCol" id="yes">
+                <legend>Get</legend>
+            </fieldset>
 
-        <fieldset class="down leftCol" id="maybe">
-            <legend>Maybe</legend>
-        </fieldset>
+            <fieldset class="down leftCol" id="maybe">
+                <legend>Maybe</legend>
+            </fieldset>
 
-        <fieldset class="down leftCol" id="no">
-            <legend>Thats a no for me,dog</legend>
-        </fieldset>
+            <fieldset class="down leftCol" id="no">
+                <legend>Thats a no for me,dog</legend>
+            </fieldset>
+        </div>
     </body>
 </html>
 <script>

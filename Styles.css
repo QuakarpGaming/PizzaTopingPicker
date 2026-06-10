@@ -32,3 +32,10 @@ body{
     border: 2px darkred solid;
     text-align: center;
 }
+.toppingsBox
+{
+    width:80%;
+}
+.nameBox{
+    width:20%;
+}
