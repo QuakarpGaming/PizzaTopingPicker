@@ -6,15 +6,23 @@
     <body>
         <fieldset class="down" id="peopleList">
             <!--
-                TODO
-                -in the read google sheet call, add the HTML genneration
-                -add the JS to check and update the topings 
-                -default Blank rows to M
-            -->
+            TODO
+            -in the read google sheet call, add the HTML genneration
+            -add the JS to check and update the topings
+            -default Blank rows to M
+        -->
             <legend>People</legend>
         </fieldset>
-        <fieldset class="down leftCol" id="toppings">
-            <legend>Topping</legend>
+        <fieldset class="down leftCol" id="yes">
+            <legend>Get</legend>
+        </fieldset>
+
+        <fieldset class="down leftCol" id="maybe">
+            <legend>Maybe</legend>
+        </fieldset>
+
+        <fieldset class="down leftCol" id="no">
+            <legend>Thats a no for me,dog</legend>
         </fieldset>
     </body>
 </html>
@@ -76,14 +84,18 @@
             }
         })
 
-        //grab fieldset
-        var toppingsFieldSet = document.getElementById("toppings")
-        //reset innerHTML
-        toppingsFieldSet.innerHTML = `<legend>Topping</legend>`
-        //add results
-        toppingsFieldSet.innerHTML += yesStr;
-        toppingsFieldSet.innerHTML += maybeStr;
-        toppingsFieldSet.innerHTML += noString;
+       
+        var yesFieldSet = document.getElementById("yes")
+        yesFieldSet.innerHTML = `<legend>GET</legend>`
+        yesFieldSet.innerHTML += yesStr;
+
+        var maybeFieldSet = document.getElementById("maybe")
+        maybeFieldSet.innerHTML = `<legend>Maybe</legend>`
+        maybeFieldSet.innerHTML += maybeStr;
+
+        var noFieldSet = document.getElementById("no")
+        noFieldSet.innerHTML = `<legend>Thats a no for me, dog</legend>`
+        noFieldSet.innerHTML += noString;
     }
 
 
