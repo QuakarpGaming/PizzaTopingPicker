@@ -12,22 +12,9 @@
                 -default Blank rows to M
             -->
             <legend>People</legend>
-                <!--
-                <label>Dailey&nbsp;<input type="checkbox" id="Dailey"></label>
-            	<label>Paul&nbsp;<input type="checkbox" id="Paul"></label>
-                <label>Neil&nbsp;<input type="checkbox" id="Neil"></label>
-            	<label>Alex&nbsp;<input type="checkbox" id="Alex"></label>
-                <label>Anna&nbsp;<input type="checkbox" id="Anna"></label>
-                <label>Kelsey&nbsp;<input type="checkbox" id="Kelsey"></label>
-                <label>Mike&nbsp;<input type="checkbox" id="Mike"></label>
-                <label>Dennis&nbsp;<input type="checkbox" id="Dennis"></label>
-                <label>Pat&nbsp;<input type="checkbox" id="Pat"></label>
-                <label>Jenna&nbsp;<input type="checkbox" id="Jenna"></label>	
-                <label>Brendan&nbsp;<input type="checkbox" id="Brendan"></label>
-                -->
         </fieldset>
-        <fieldset class="down leftCol">
-            <label class="no">Green Pepper</label>
+        <fieldset class="down leftCol" id="toppings">
+            <legend>Topping</legend>
         </fieldset>
     </body>
 </html>
@@ -36,8 +23,63 @@
     const spreadsheetId = '176Bgd3bxvrtFnCZTZnZFbm7hIHKAUxioBJuQDfznwck';
     const gid = '0';
     var toppings = [];
+    var names = [];
     var data = {};
-     
+
+    function recalc() {
+        var results = {}
+        names.forEach((name) => {
+            //see if checked
+            var isChecked = document.getElementById(name.replace(" ", "_")).checked
+            if (isChecked)
+            {
+                var dataRow = data[name];
+                toppings.forEach((top) => {
+                    //check results for topping
+                    var currentToppingResult = results[top];
+                    if (currentToppingResult == undefined)
+                    {
+                        //add if not there yet
+                        results[top] = "M";
+                    }
+                    if (currentToppingResult != "N") {
+                        var personPrefernce = data[name][top];
+                        if (personPrefernce == undefined || personPrefernce == "") {
+                            personPrefernce = "M";
+                        }
+
+                        if ((currentToppingResult == "Y" && personPrefernce != "Y")
+                            || (currentToppingResult == "M" && personPrefernce == "N")
+                        )
+                        {
+                            results[top] = personPrefernce;
+                        }
+                    }
+                })
+            }
+        })
+        var yesStr = "";
+        var maybeStr = ""
+        var noString = "";
+        toppings.forEach((top) => {
+            switch (results[top]) {
+                case "Y":
+                    yesStr += `<label class="yes">${top}</label>`;
+                    break;
+                case "N":
+                    noString += `<label class="no">${top}</label>`;
+                    break;
+                default:
+                    maybeStr += `<label class="maybe">${top}</label>`;
+            }
+        })
+
+        //grab fieldset
+        var toppingsFieldSet = document.getElementById("toppings")
+        toppingsFieldSet += yesStr;
+        toppingsFieldSet += maybeStr;
+        toppingsFieldSet += noString;
+    }
 
 
     async function readGoogleSheetCSV() {
@@ -61,11 +103,12 @@
                     {
                         let cols = rows[i].split(',')
                         var newJSONRowString = `"${cols[0]}":{`;//get name
-                        namesContainer.innerHTML += `<label>${cols[0]}&nbsp;<input type="checkbox" checked id="${cols[0].replace(" ","_")}"></label>`
+                        names.push(cols[0]);
+                        namesContainer.innerHTML += `<label>${cols[0]}&nbsp;<input type="checkbox" checked id="${cols[0].replace(" ","_")}" onchange="recalc()"></label>`
                         for (var o = 1; o < cols.length; o++)
                         {
                             //starts at one to get toppings and not name
-                            newJSONRowString += `"${headers[o]}":"${cols[o]}",`;
+                            newJSONRowString += `"${headers[o]}":"${cols[o].toUpperCase()}",`;
                         }
                         //end the toppings data obj
                         newJSONRowString = newJSONRowString.slice(0, -1) + "},";
