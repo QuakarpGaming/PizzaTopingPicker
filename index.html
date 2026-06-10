@@ -137,7 +137,7 @@
                     JSONData = JSONData.slice(0, -1) + "}";
 
                     data = JSON.parse(JSONData); // save globally
-
+                    recalc();
                 })
         } catch (error) {
             console.error("Failed to fetch Google Sheet:", error);
