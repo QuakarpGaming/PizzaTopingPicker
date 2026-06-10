@@ -33,9 +33,11 @@ body {
     border: 2px darkred solid;
     text-align: center;
 }
-.toppingsBox
-{
-    width:80%;
+.toppingsBox {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .nameBox{
     width:20%;
