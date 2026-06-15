@@ -127,7 +127,7 @@
         names.forEach((name) => {
             bodyStr += `<tr><td>${name}</td>`
             var currentResults = results[name];
-            headers.forEach((top) =>
+            toppings.forEach((top) =>
             {
                 bodyStr += `<td class='${classTranslation[currentResults[top]]}'>${currentResults[top]}</td>`
             })
