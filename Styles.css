@@ -5,6 +5,9 @@ body {
     align-items: flex-start;
     min-width: 1080px;
 }
+label{
+    white-space:nowrap;
+}
 
 .down{
     display: flex;
