@@ -47,7 +47,12 @@ label{
     min-width :fit-content !important;
     margin-left: 10px;
 }
-#tableTableView > tbody > tr > td {
+#tableTableView > tbody > tr > td
+#tableTableView > thead > tr > th {
+    border: 2px black solid;
+    text-align: center;
+}
+#tableTableView > thead > tr > th {
     border: 2px black solid;
 }
 .nameBox {
