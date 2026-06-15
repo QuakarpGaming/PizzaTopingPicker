@@ -51,6 +51,7 @@ label{
 {
     border: 2px black solid;
     text-align: center;
+    white-space: nowrap;
 }
 #tableTableView > thead > tr > th {
     border: 2px black solid;
