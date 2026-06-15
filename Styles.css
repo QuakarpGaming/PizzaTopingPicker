@@ -45,7 +45,7 @@ body {
     margin-left: 10px;
 }
 .nameBox{
-    width:20%;
+    max-width: 20%;
 }
 .hidden{
     display:none;
