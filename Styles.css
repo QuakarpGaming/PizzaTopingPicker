@@ -48,12 +48,13 @@ label{
     margin-left: 10px;
 }
 #tableTableView > tbody > tr > td
-#tableTableView > thead > tr > th {
+{
     border: 2px black solid;
     text-align: center;
 }
 #tableTableView > thead > tr > th {
     border: 2px black solid;
+    text-align: center;
 }
 .nameBox {
     max-width: 20%;
