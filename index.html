@@ -13,7 +13,7 @@
         -->
             <legend>People</legend>
         </fieldset>
-        <div class="toppingsBox">
+        <div class="toppingsBox" id="listView">
             <fieldset class="down leftCol" id="yes">
                 <legend>Get</legend>
             </fieldset>
@@ -25,6 +25,13 @@
             <fieldset class="down leftCol" id="no">
                 <legend>Thats a no for me,dog</legend>
             </fieldset>
+            <button onclick="switchView('T')">Table View</button>
+        </div>
+        <div class="toppingsBox hidden" id="tableView">
+            <table id="tableTableView">
+
+            </table>
+            <button onclick="switchView('L')">List View</button>
         </div>
     </body>
 </html>
@@ -35,10 +42,15 @@
     var toppings = [];
     var names = [];
     var data = {};
-
+    var classTranslation = {
+        "Y" : "yes",
+        "M" : "maybe",
+        "N" : "no"
+    }
     function recalc() {
         var results = {}
         names.forEach((name) => {
+            // list view
             //see if checked
             var isChecked = document.getElementById(name.replace(" ", "_")).checked
             if (isChecked)
@@ -98,8 +110,50 @@
         var noFieldSet = document.getElementById("no")
         noFieldSet.innerHTML = `<legend>Thats a no for me, dog</legend>`
         noFieldSet.innerHTML += noString;
+
+        //table view
+        var table = document.getElementById('tableTableView');
+
+
+        //header
+        var headerStr = "<thead><tr><th>Name</th>"
+        headers.forEach((header) => {
+            headerStr += `<th class='${classTranslation[results[header]]}'>${header}</th>`;
+        });
+        headerStr += "</tr></thead>"
+
+        //body
+        var bodyStr = "<tbody>"
+        name.forEach((name) => {
+            bodyStr += `<tr><td>${name}</td>`
+            var currentResults = results[name];
+            headers.forEach((top) =>
+            {
+                bodyStr += `<td class='${classTranslation[currentResults[top]]}'>${currentResults[top]}</td>`
+            })
+            bodyStr += "</tr>"
+        })
+        bodyStr += "</tbody>";
+
+        table.innerHTML = headerStr + bodyStr;
+
     }
 
+    function switchView(newView)
+    {
+        var listView = document.getElementById("listView");
+        var tableView = document.getElementById("tableView");
+        if (newView == "T") {
+            listView.classList.add("hidden");
+            tableView.classList.remove("hidden");
+        }
+        else
+        {
+            listView.classList.remove("hidden");
+            tableView.classList.add("hidden");
+        }
+
+    }
 
     async function readGoogleSheetCSV() {
         try {
@@ -113,6 +167,8 @@
                         if (x != "Name")
                             toppings.push(x)
                     })
+
+                    headers.sort();
 
                     //grab the container
                     var namesContainer = document.getElementById("peopleList")
