@@ -181,7 +181,7 @@
                         let cols = rows[i].split(',')
                         var newJSONRowString = `"${cols[0]}":{`;//get name
                         names.push(cols[0]);
-                        namesContainer.innerHTML += `<label>${cols[0]}&nbsp;<input type="checkbox" checked id="${cols[0].replace(" ","_")}" onchange="recalc()"></label>`
+                        
                         for (var o = 1; o < cols.length; o++)
                         {
                             //starts at one to get toppings and not name
@@ -195,6 +195,10 @@
                     JSONData = JSONData.slice(0, -1) + "}";
 
                     data = JSON.parse(JSONData); // save globally
+                    names.sort();
+                    names.forEach((name) => {
+                        namesContainer.innerHTML += `<label>${name}&nbsp;<input type="checkbox" checked id="${name.replace(" ", "_")}" onchange="recalc()"></label>`
+                    })
                     recalc();
                 })
         } catch (error) {
