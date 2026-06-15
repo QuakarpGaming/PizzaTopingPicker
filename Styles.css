@@ -47,7 +47,10 @@ label{
     min-width :fit-content !important;
     margin-left: 10px;
 }
-.nameBox{
+#tableTableView > tbody > tr > td {
+    border: 2px black solid;
+}
+.nameBox {
     max-width: 20%;
     margin-right: 2%;
 }
