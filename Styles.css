@@ -43,10 +43,10 @@ body {
 }
 #tableView{
     width:fit-content !important;
+    margin-left: 10px;
 }
 .nameBox{
     width:20%;
-    margin-left: 
 }
 .hidden{
     display:none;
