@@ -12,7 +12,8 @@ body {
     width: fit-content;
 }
 .leftCol{
-    width: 80%;
+    max-width: 80%;
+    width: fit-content;
 }
 
 .yes{
@@ -45,6 +46,7 @@ body {
 }
 .nameBox{
     width:20%;
+    margin-left: 
 }
 .hidden{
     display:none;
