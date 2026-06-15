@@ -125,13 +125,15 @@
         //body
         var bodyStr = "<tbody>"
         names.forEach((name) => {
-            bodyStr += `<tr><td>${name}</td>`
-            var currentResults = data[name];
-            toppings.forEach((top) =>
-            {
-                bodyStr += `<td class='${classTranslation[currentResults[top]]}'>${currentResults[top]}</td>`
-            })
-            bodyStr += "</tr>"
+            var isChecked = document.getElementById(name.replace(" ", "_")).checked
+            if (isChecked) {
+                bodyStr += `<tr><td>${name}</td>`
+                var currentResults = data[name];
+                toppings.forEach((top) => {
+                    bodyStr += `<td class='${classTranslation[currentResults[top]]}'>${currentResults[top]}</td>`
+                })
+                bodyStr += "</tr>"
+            }
         })
         bodyStr += "</tbody>";
 
