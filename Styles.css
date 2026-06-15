@@ -12,8 +12,7 @@ body {
     width: fit-content;
 }
 .leftCol{
-    max-width: 80%;
-    width: fit-content;
+    width: 100%
 }
 
 .yes{
@@ -36,7 +35,7 @@ body {
     text-align: center;
 }
 .toppingsBox {
-    width: 80%;
+    max-width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
