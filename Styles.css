@@ -12,7 +12,7 @@ body {
     width: fit-content;
 }
 .leftCol{
-    width: 100%
+    min-width: 100%
 }
 
 .yes{
@@ -41,7 +41,7 @@ body {
     align-items: center;
 }
 #tableView{
-    width:fit-content !important;
+    min-width :fit-content !important;
     margin-left: 10px;
 }
 .nameBox{
